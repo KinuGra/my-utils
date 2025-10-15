@@ -36,11 +36,15 @@ if not exist "%TRELLO_PROFILE%" mkdir "%TRELLO_PROFILE%"
 
 :: === Googleカレンダー ===
 echo Googleカレンダーを起動中...
-start "" "%BRAVE%" --user-data-dir="%CALENDAR_PROFILE%" --new-window "https://calendar.google.com" --window-position=%X%,%Y% --window-size=%W%,%TOPH%
+start "" "!BRAVE!" --user-data-dir="!CALENDAR_PROFILE!" --profile-directory="Default" ^
+    --no-first-run --no-default-browser-check --new-window "https://calendar.google.com" ^
+    --window-position=!X!,!Y! --window-size=!W!,!TOPH!
 
 :: === Trello ===
 echo Trelloを起動中...
-start "" "%BRAVE%" --user-data-dir="%TRELLO_PROFILE%" --new-window "https://trello.com" --window-position=%X%,!Y2! --window-size=%W%,%BOTTOMH%
+start "" "!BRAVE!" --user-data-dir="!TRELLO_PROFILE!" --profile-directory="Default" ^
+    --no-first-run --no-default-browser-check --new-window "https://trello.com" ^
+    --window-position=!X!,!Y2! --window-size=!W!,!BOTTOMH!
 
 echo.
 echo ✅ Googleカレンダー（上2/3）と Trello（下1/3）をモニター3に配置しました。

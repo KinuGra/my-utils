@@ -5,14 +5,19 @@
 
 ## 使い方
 - urls.txt.exampleをコピーしてurls.txtにリネームし、URLを開きたいページに書き換える
-- Windows環境で.batをダブルクリックで実行<br>
+- Windows環境で.batをダブルクリックで実行
+
 ※urls.txtが存在しない、またはURLが不正な場合は自動的に以下の既定URLが使用されます。<br>
-Googleカレンダー → https://calendar.google.com<br>
-Trello → https://trello.com
+- Googleカレンダー → https://calendar.google.com
+- Trello → https://trello.com
 
 ## 注意事項
 - このスクリプトは実行時にすべてのBraveウィンドウを終了します。
 - 必要に応じてパスを変更して利用してください。
+
+## モニター構成・配置について
+このスクリプトはモニターの位置を固定座標（X=1920, Y=0）で指定しています。そのため、実際にウィンドウが表示される位置はモニター構成・配置によって異なります。<br>
+例えば、左側のモニターを横置き、右側のモニターを縦置きにすると右側のモニターに表示されます。
 
 ## Braveシールドについて
 GoogleカレンダーやTrelloはログイン情報をクロスサイトCookieに保存するため、Shieldsが有効なままだとログイン状態が保持されない場合があります。

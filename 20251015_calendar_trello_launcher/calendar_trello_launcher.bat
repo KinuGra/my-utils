@@ -1,5 +1,5 @@
 @echo off
-chcp 65001 >nul
+chcp 65001
 setlocal enabledelayedexpansion
 
 :: === Braveのパス ===
@@ -17,29 +17,31 @@ set /a BOTTOMH=%H%-%TOPH%
 set /a Y2=%Y%+%TOPH%
 
 echo.
-echo Monitor 3 Settings:
+echo モニター3の設定:
 echo X=%X%  Y=%Y%  W=%W%  H=%H%
-echo TOPH=%TOPH%  BOTTOMH=%BOTTOMH%  Y2=%Y2%
+echo 上2/3=%TOPH%  下1/3=%BOTTOMH%  下段Y開始=%Y2%
 echo.
 
+:: === Braveプロセスを完全終了 ===
 taskkill /IM brave.exe /F >nul 2>&1
 timeout /t 1 >nul
 
-set "CALENDAR_PROFILE=%TEMP%\brave_calendar_profile"
-set "TRELLO_PROFILE=%TEMP%\brave_trello_profile"
+:: === 固定プロファイル（ログイン状態保持用） ===
+set "PROFILE_DIR=%USERPROFILE%\Documents\BraveProfiles"
+set "CALENDAR_PROFILE=%PROFILE_DIR%\calendar"
+set "TRELLO_PROFILE=%PROFILE_DIR%\trello"
 
-if exist "%CALENDAR_PROFILE%" rmdir /s /q "%CALENDAR_PROFILE%"
-if exist "%TRELLO_PROFILE%" rmdir /s /q "%TRELLO_PROFILE%"
+if not exist "%CALENDAR_PROFILE%" mkdir "%CALENDAR_PROFILE%"
+if not exist "%TRELLO_PROFILE%" mkdir "%TRELLO_PROFILE%"
 
-mkdir "%CALENDAR_PROFILE%" >nul
-mkdir "%TRELLO_PROFILE%" >nul
-
-echo Launching Google Calendar...
+:: === Googleカレンダー ===
+echo Googleカレンダーを起動中...
 start "" "%BRAVE%" --user-data-dir="%CALENDAR_PROFILE%" --new-window "https://calendar.google.com" --window-position=%X%,%Y% --window-size=%W%,%TOPH%
 
-echo Launching Trello...
-start "" "%BRAVE%" --user-data-dir="%TRELLO_PROFILE%" --new-window "https://trello.com" --window-position=%X%,%Y2% --window-size=%W%,%BOTTOMH%
+:: === Trello ===
+echo Trelloを起動中...
+start "" "%BRAVE%" --user-data-dir="%TRELLO_PROFILE%" --new-window "https://trello.com" --window-position=%X%,!Y2! --window-size=%W%,%BOTTOMH%
 
 echo.
-echo Google Calendar (top 2/3) and Trello (bottom 1/3) opened on monitor 3.
+echo ✅ Googleカレンダー（上2/3）と Trello（下1/3）をモニター3に配置しました。
 pause
